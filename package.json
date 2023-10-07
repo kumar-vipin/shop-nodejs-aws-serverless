@@ -1,0 +1,19 @@
+{
+  "name": "shop-nodejs-aws-serverless",
+  "version": "1.0.0",
+  "description": "The backend for the E-Commerce application (Shop) has been developed using NodeJS, AWS Cloud, and a Serverless architecture utilizing the Serverless framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kumar-vipin/shop-nodejs-aws-serverless.git"
+  },
+  "author": "VIPIN KUMAR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kumar-vipin/shop-nodejs-aws-serverless/issues"
+  },
+  "homepage": "https://github.com/kumar-vipin/shop-nodejs-aws-serverless#readme"
+}
