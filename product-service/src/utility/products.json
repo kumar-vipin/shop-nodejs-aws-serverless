@@ -1,0 +1,182 @@
+[
+  {
+    "id": "9878a151-35a3-49c6-93d7-fc112dee4d8b",
+    "title": "The Great Gatsby",
+    "description": "A story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan.",
+    "price": 15.99,
+    "logo": "http://dummyimage.com/62x71.png/5fa2dd/ffffff",
+    "image": "http://tiny.cc/df3cvz",
+    "count": 82
+  },
+  {
+    "id": "748d605c-d543-413d-b2cc-02a42dbf85c7",
+    "title": "To Kill a Mockingbird",
+    "description": "A novel that deals with the serious issues of rape and racial inequality in the American South.",
+    "price": 12.49,
+    "logo": "http://dummyimage.com/68x86.png/ff4444/ffffff",
+    "image": "http://tiny.cc/if3cvz",
+    "count": 49
+  },
+  {
+    "id": "15cce276-ef9c-43ce-b72b-b317606f98e4",
+    "title": "1984",
+    "description": "A dystopian social science fiction novel that explores the dangers of totalitarianism and mass surveillance.",
+    "price": 10.99,
+    "logo": "http://dummyimage.com/60x86.png/ff4444/ffffff",
+    "image": "http://tiny.cc/qf3cvz",
+    "count": 50
+  },
+  {
+    "id": "5fe4a090-001f-4a7a-a7a9-0e2f1b2d415c",
+    "title": "Pride and Prejudice",
+    "description": "A romantic novel that follows the emotional development of the protagonist Elizabeth Bennet.",
+    "price": 14.95,
+    "logo": "http://dummyimage.com/78x80.png/ff4444/ffffff",
+    "image": "http://tiny.cc/uf3cvz",
+    "count": 24
+  },
+  {
+    "id": "fc9e3b87-54bb-457e-b51b-861020842281",
+    "title": "The Hobbit",
+    "description": "A fantasy novel that tells the story of Bilbo Baggins and his adventures.",
+    "price": 16.99,
+    "logo": "http://dummyimage.com/71x79.png/ff4444/ffffff",
+    "image": "http://tiny.cc/6g3cvz",
+    "count": 29
+  },
+  {
+    "id": "d34b19c2-ae42-4e48-bb1e-c77919e64e67",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "description": "The first book in the Harry Potter series, a tale of magic, friendship, and adventure.",
+    "price": 18.5,
+    "logo": "http://dummyimage.com/76x83.png/ff4444/ffffff",
+    "image": "https://media.harrypotterfanzone.com/philsophers-stone-uk-childrens-edition-1050x0-c-default.jpg",
+    "count": 65
+  },
+  {
+    "id": "3bb7a9e5-d3ae-4f44-b779-94c90b80304e",
+    "title": "The Catcher in the Rye",
+    "description": "A novel about a teenage boy named Holden Caulfield and his experiences in New York City.",
+    "price": 11.75,
+    "logo": "http://dummyimage.com/50x58.png/dddddd/000000",
+    "image": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/80341619846549.562e1421640e3.jpg",
+    "count": 97
+  },
+  {
+    "id": "cfbe02db-c43a-4e29-b4f7-771b82ca1e61",
+    "title": "Lord of the Flies",
+    "description": "A novel that explores the dark side of human nature as a group of boys are stranded on an uninhabited island.",
+    "price": 9.99,
+    "logo": "http://dummyimage.com/84x67.png/dddddd/000000",
+    "image": "https://m.media-amazon.com/images/I/81WUAoL-wFL._SL1500_.jpg",
+    "count": 11
+  },
+  {
+    "id": "8ebd45a8-fe3c-46e9-ad3b-06174c7f163e",
+    "title": "The Da Vinci Code",
+    "description": "A mystery thriller novel that follows symbologist Robert Langdon as he investigates a murder in the Louvre Museum.",
+    "price": 13.99,
+    "logo": "http://dummyimage.com/85x69.png/ff4444/ffffff",
+    "image": "http://dummyimage.com/311x354.png/5fa2dd/ffffff",
+    "count": 6
+  },
+  {
+    "id": "cf5367ae-0197-4fc3-b9f3-22c7b146d12a",
+    "title": "Brave New World",
+    "description": "A dystopian science fiction novel that explores the potential dangers of a technologically advanced world.",
+    "price": 12.99,
+    "logo": "http://dummyimage.com/92x86.png/cc0000/ffffff",
+    "image": "http://dummyimage.com/342x316.png/dddddd/000000",
+    "count": 3
+  },
+  {
+    "id": "96620fc8-ebf4-4b0d-ad15-9e4f90738487",
+    "title": "Crime and Punishment",
+    "description": "A psychological novel that explores the mental anguish and moral dilemmas of an impoverished ex-student.",
+    "price": 11.25,
+    "logo": "http://dummyimage.com/68x77.png/ff4444/ffffff",
+    "image": "http://dummyimage.com/345x391.png/5fa2dd/ffffff",
+    "count": 70
+  },
+  {
+    "id": "fd48c52f-2cb4-4480-8a70-8d6ea145dc30",
+    "title": "Moby Dick",
+    "description": "A novel that follows Ishmael's sea voyage and his obsession with the elusive white whale, Moby Dick.",
+    "price": 14.99,
+    "logo": "http://dummyimage.com/57x50.png/dddddd/000000",
+    "image": "http://dummyimage.com/352x331.png/dddddd/000000",
+    "count": 81
+  },
+  {
+    "id": "d4bf0b94-423b-4cde-b34b-ac44b3c8ca90",
+    "title": "The Odyssey",
+    "description": "An epic ancient Greek poem attributed to Homer, telling the story of Odysseus's journey home from the Trojan War.",
+    "price": 9.49,
+    "logo": "http://dummyimage.com/100x72.png/ff4444/ffffff",
+    "image": "http://dummyimage.com/339x397.png/5fa2dd/ffffff",
+    "count": 12
+  },
+  {
+    "id": "1ddbf72d-6fc3-44e7-a650-cf305e5d2563",
+    "title": "Frankenstein",
+    "description": "A novel that explores themes of creation, morality, and the consequences of scientific advancement.",
+    "price": 10.99,
+    "logo": "http://dummyimage.com/51x85.png/ff4444/ffffff",
+    "image": "http://dummyimage.com/358x330.png/ff4444/ffffff",
+    "count": 99
+  },
+  {
+    "id": "d19b68e6-939b-41a9-8e73-f0ac1e80f44d",
+    "title": "The Alchemist",
+    "description": "A philosophical novel following the journey of Santiago, a shepherd boy.",
+    "price": 12.75,
+    "logo": "http://dummyimage.com/55x59.png/cc0000/ffffff",
+    "image": "http://dummyimage.com/398x345.png/ff4444/ffffff",
+    "count": 35
+  },
+  {
+    "id": "ee6a9ac0-a078-4583-854f-f32061762da3",
+    "title": "Great Expectations",
+    "description": "A novel following the life and personal development of an orphan named Pip.",
+    "price": 11.99,
+    "logo": "http://dummyimage.com/65x92.png/ff4444/ffffff",
+    "image": "http://dummyimage.com/324x307.png/cc0000/ffffff",
+    "count": 60
+  },
+  {
+    "id": "197d9aac-9b44-4929-aee7-87953594851b",
+    "title": "The Picture of Dorian Gray",
+    "description": "A philosophical novel about the consequences of eternal youth and beauty.",
+    "price": 13.49,
+    "logo": "http://dummyimage.com/88x55.png/cc0000/ffffff",
+    "image": "http://dummyimage.com/367x397.png/ff4444/ffffff",
+    "count": 17
+  },
+  {
+    "id": "5f0b7796-3d8b-4891-bd5a-e0aeb24e0a58",
+    "title": "Wuthering Heights",
+    "description": "A novel exploring the destructive effects of jealousy and vengefulness.",
+    "price": 10.25,
+    "logo": "http://dummyimage.com/56x64.png/dddddd/000000",
+    "image": "http://dummyimage.com/383x339.png/cc0000/ffffff",
+    "count": 72
+  },
+  {
+    "id": "175c2456-3132-4d67-a6d1-b1afb183a53a",
+    "title": "The Adventures of Sherlock Holmes",
+    "description": "A collection of detective stories featuring Sherlock Holmes and his friend Dr. John Watson.",
+    "price": 14.99,
+    "logo": "http://dummyimage.com/83x84.png/ff4444/ffffff",
+    "image": "http://dummyimage.com/330x317.png/5fa2dd/ffffff",
+    "count": 47
+  },
+  {
+    "id": "09e6684e-610b-447b-96fd-71d37f2655c0",
+    "title": "The Road",
+    "description": "A post-apocalyptic novel following the journey of a father and his young son over a period of several months across a landscape blasted by an unspecified cataclysm.",
+    "price": 16.49,
+    "logo": "http://dummyimage.com/64x89.png/5fa2dd/ffffff",
+    "image": "http://dummyimage.com/361x377.png/cc0000/ffffff",
+    "count": 83
+  }
+]
