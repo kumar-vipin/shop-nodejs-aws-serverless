@@ -22,6 +22,16 @@ Find the entire program architecture: [here](readme-resource/Architecture.pdf).
 3. The response from the lambda should be 1 searched product from an array of products (mock data should be used - this mock data should be stored in Product Service).
 4. This endpoint is not needed to be integrated with Frontend right now.
 
+## Evaluation criteria
+
+---
+Reviewers should verify the lambda functions by invoking them through provided URLs.
+
+- Product Service Serverless config contains configuration for 2 lambda functions, API is not working at all, but YAML configuration is correct
+- The `getProductsList` OR `getProductsById` lambda function returns a correct response (POINT1)
+- The `getProductsById` AND `getProductsList` lambda functions return a correct response code (POINT2)
+- Your own Frontend application is integrated with Product Service (`/products` API) and products from Product Service are represented on Frontend. AND POINT1 and POINT2 are done.
+
 
 # Task 4 (Integration with NoSQL Database)
 <details>
@@ -101,3 +111,60 @@ _NOTE: This setup means User cannot buy more than `product.count` (no more items
 2. The requested URL should be `/products`.
 3. Implement its logic so it will be creating a new item in a Products table.
 4. Save the URL (API Gateway URL) to execute the implemented lambda functions for later - you'll need to provide it in the PR (e.g in PR's description) when submitting the task.
+
+## Evaluation criteria
+
+---
+Reviewers should verify the lambda functions by invoking them through provided URLs.
+
+- Task 4.1 is implemented
+- Task 4.2 is implemented lambda links are provided and returns data
+- Task 4.3 is implemented lambda links are provided and products is stored in DB (call Task 4.2 to see the product)
+- Your own Frontend application is integrated with Product Service (`/products` API) and products from Product Service are represented on Frontend. Link to a working Frontend application is provided for cross-check reviewer.
+
+# Task 5 (Integration with S3)
+<details>
+  <summary>Task Focus</summary>
+  The following image provides more info about task focus.
+  <img src="./module5.png" />
+</details>
+
+### Task 5.1
+
+1. Create a new service called `import-service` at the same level as Product Service with a its own `serverless.yml` file. The backend project structure should look like this:
+
+```
+   backend-repository
+      product-service
+      import-service
+```
+
+2. In the AWS Console **create** and **configure** a new S3 bucket with a folder called `uploaded`.
+
+### Task 5.2
+
+1. Create a lambda function called `importProductsFile` under the same Serverless config file (i.e. `serverless.yaml`) of the Import Service which will be triggered by the HTTP GET method.
+2. The requested URL should be `/import`.
+3. Implement its logic so it will be expecting a request with a name of CSV file with products and creating a new **Signed URL** with the following key: `uploaded/${fileName}`.
+4. The name will be passed in a _query string_ as a `name` parameter and should be described in the `serverless.yml` file as a _request parameter_.
+5. Update `serverless.yml` with policies to allow lambda functions to interact with S3.
+6. The response from the lambda should be the created **Signed URL**.
+7. The lambda endpoint should be integrated with the frontend by updating `import` property of the API paths configuration.
+
+### Task 5.3
+
+1. Create a lambda function called `importFileParser` under the same `serverless.yml` file which will be triggered by an S3 event.
+2. The event should be `s3:ObjectCreated:*`
+3. Configure the event to be fired only by changes in the `uploaded` folder in S3.
+4. The lambda function should use a _readable stream_ to get an object from S3, parse it using `csv-parser` package and log each record to be shown in CloudWatch.
+
+
+## Evaluation criteria
+
+---
+Reviewers should verify the lambda functions by invoking them through provided URLs.
+
+- File `serverless.yml` contains configuration for `importProductsFile` function
+- The `importProductsFile` lambda function returns a correct response which can be used to upload a file into the S3 bucket
+- Frontend application is integrated with `importProductsFile` lambda
+- The `importFileParser` lambda function is implemented and `serverless.yml` contains configuration for the lambda
