@@ -29,6 +29,13 @@ provider:
   region: us-east-1
   environment:
     ENV_STAGE: dev
+    DYNAMODB_TABLE_PRODUCTS: 'products'
+    DYNAMODB_TABLE_STOCKS: 'stocks'
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: '*'
 
 plugins:
   - serverless-webpack
@@ -88,6 +95,13 @@ functions:
       - http:
           path: /products/{productId}
           method: get
+          cors: true
+  createProduct:
+    handler: handler.createProduct
+    events:
+      - http:
+          path: /products
+          method: post
           cors: true
 
 #    The following are a few example events you can configure

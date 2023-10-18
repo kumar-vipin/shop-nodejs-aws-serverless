@@ -1,0 +1,76 @@
+{
+  "products": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "9878a151"
+          },
+          "title": {
+            "S": "The Great Gatsby"
+          },
+          "description": {
+            "S": "A story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan."
+          },
+          "price": {
+            "N": "15.99"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "748d605c"
+          },
+          "title": {
+            "S": "To Kill a Mockingbird"
+          },
+          "description": {
+            "S": "A novel that deals with the serious issues of rape and racial inequality in the American South."
+          },
+          "price": {
+            "N": "12.49"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "fc112dee4d8b"
+          },
+          "title": {
+            "S": "The Hobbit"
+          },
+          "description": {
+            "S": "A fantasy novel that tells the story of Bilbo Baggins and his adventures."
+          },
+          "price": {
+            "N": "13.99"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "02a42dbf85c7"
+          },
+          "title": {
+            "S": "Harry Potter and the Sorcerer's Stone"
+          },
+          "description": {
+            "S": "The first book in the Harry Potter series, a tale of magic, friendship, and adventure."
+          },
+          "price": {
+            "N": "100.49"
+          }
+        }
+      }
+    }
+  ]
+}
