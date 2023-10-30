@@ -1,0 +1,53 @@
+service: import-service
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+  environment:
+    ENV_STAGE: dev
+    S3_BUCKET_NAME: 'my-store-app-import-vks'
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+        - s3:ListBucket
+      Resource:
+        - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}/*
+        - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}
+
+plugins:
+  - serverless-webpack
+  - serverless-plugin-typescript
+
+custom:
+  webpack:
+    webpackConfig: webpack.config.js
+  typescript:
+    tsconfigPath: tsconfig.json
+
+functions:
+  importProductsFile:
+    handler: handler.importProductsFile
+    events:
+      - http:
+          path: /import
+          method: get
+          cors: true
+          request:
+            parameters:
+              querystrings:
+                name: true
+  importFileParser:
+    handler: handler.importFileParser
+    events:
+      - s3:
+          bucket: ${self:provider.environment.S3_BUCKET_NAME}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaded/
+          existing: true
