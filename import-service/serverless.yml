@@ -22,11 +22,13 @@ provider:
 
 plugins:
   - serverless-webpack
+  - serverless-plugin-typescript
 
 custom:
   webpack:
-    webpackConfig: 'webpack.config.js'
-    includeModules: true
+    webpackConfig: webpack.config.js
+  typescript:
+    tsconfigPath: tsconfig.json
 
 functions:
   importProductsFile:

@@ -1,3 +1,3 @@
-export * from './hello';
-export * from './importProductsFile';
-export * from './importFileParser';
+export * from './hello/hello';
+export * from './importProductsFile/importProductsFile';
+export * from './importFileParser/importFileParser';

@@ -1,9 +1,8 @@
 import AWS from 'aws-sdk';
 import csv from 'csv-parser';
 
-const s3 = new AWS.S3();
-
 const importFileParser = async (event) => {
+  const s3 = new AWS.S3();
   const records = event?.Records || [];
   try {
     const resultPromises = records.map(async (record) => {
