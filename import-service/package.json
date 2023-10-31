@@ -12,7 +12,8 @@
   "scripts": {
     "package-build": "sls package",
     "deploy:dev": "sls deploy --stage dev",
-    "remove:dev-stack": "sls remove --stage dev --region us-east-1"
+    "remove:dev-stack": "sls remove --stage dev --region us-east-1",
+    "logs:test": "sls logs -f"
   },
   "dependencies": {
     "aws-sdk": "^2.1478.0",
