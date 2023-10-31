@@ -2,8 +2,5 @@
 node_modules
 jspm_packages
 
-# Coverage directories
-coverage
-
 # Serverless directories
 .serverless
