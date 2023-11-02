@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk';
 
-const documentClient = new AWS.DynamoDB.DocumentClient();
+AWS.config.update({region: process.env.awsRegion});
 
 export enum Statuses {
   SUCCESS,
@@ -21,10 +21,11 @@ const DynamoDB = {
     };
   },
 
-  async get(params): Promise<IResponseInterface> {
+  async transactWriteItems(params): Promise<IResponseInterface> {
     try {
-      const data = await documentClient.get(params).promise();
-      return this.response(data.Item);
+      const dynamoDb = new AWS.DynamoDB();
+      await dynamoDb.transactWriteItems(params).promise();
+      return this.response('Product created successfully');
     } catch (error) {
       return this.response(error, Statuses.ERROR, 500);
     }
@@ -32,6 +33,7 @@ const DynamoDB = {
 
   async put(params): Promise<IResponseInterface> {
     try {
+      const documentClient = new AWS.DynamoDB.DocumentClient();
       await documentClient.put(params).promise();
       return this.response('Product created successfully');
     } catch (error) {

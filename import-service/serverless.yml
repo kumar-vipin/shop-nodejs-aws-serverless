@@ -4,47 +4,49 @@ frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs14.x
   stage: dev
   region: us-east-1
+
   environment:
     ENV_STAGE: dev
     S3_BUCKET_NAME: 'my-store-app-import-vks'
     DYNAMODB_TABLE_PRODUCTS: 'products'
     DYNAMODB_TABLE_STOCKS: 'stocks'
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-        - s3:ListBucket
-      Resource:
-        - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}/*
-        - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}
-    - Effect: Allow
-      Action:
-        - sqs:SendMessage
-        - sqs:GetQueueAttributes
-        - sqs:GetQueueUrl
-        - sqs:ReceiveMessage
-      Resource:
-        - arn:aws:sqs:${self:provider.region}:*:CatalogItemsQueue
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource:
-        - arn:aws:dynamodb:${self:provider.region}:*:table/products
-        - arn:aws:dynamodb:${self:provider.region}:*:table/stocks
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:GetObject
+            - s3:ListBucket
+          Resource:
+            - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}/*
+            - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}
+
+        - Effect: Allow
+          Action:
+            - sqs:SendMessage
+            - sqs:ReceiveMessage
+          Resource:
+            - arn:aws:sqs:${self:provider.region}:*:CatalogItemsQueue
+
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+          Resource:
+            - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_PRODUCTS}
+            - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_STOCKS}
 
 plugins:
   - serverless-webpack
 
 custom:
+  awsRegion: ${self:provider.region}
   webpack:
     webpackConfig: 'webpack.config.js'
     includeModules: true
@@ -61,6 +63,7 @@ functions:
             parameters:
               querystrings:
                 name: true
+
   importFileParser:
     handler: handler.importFileParser
     events:
@@ -70,6 +73,7 @@ functions:
           rules:
             - prefix: uploaded/
           existing: true
+
   catalogBatchProcess:
     handler: handler.catalogBatchProcess
     events:
