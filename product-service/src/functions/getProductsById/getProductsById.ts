@@ -1,9 +1,9 @@
-import { DynamoDB, errorResponse, ResponseInterface, Statuses, successResponse } from '../utility';
+import { DynamoDB, errorResponse, ResponseInterface, Statuses, successResponse } from '../../common';
 
 const DYNAMODB_TABLE_PRODUCTS = process.env.DYNAMODB_TABLE_PRODUCTS;
 const DYNAMODB_TABLE_STOCKS = process.env.DYNAMODB_TABLE_STOCKS;
 
-export const getProductsById: (event) => Promise<ResponseInterface> = async (event) => {
+const getProductsById: (event) => Promise<ResponseInterface> = async (event) => {
   try {
     const productId = event?.pathParameters?.productId || '';
     if (!productId) {
@@ -37,3 +37,5 @@ export const getProductsById: (event) => Promise<ResponseInterface> = async (eve
     return errorResponse(err);
   }
 };
+
+export { getProductsById };

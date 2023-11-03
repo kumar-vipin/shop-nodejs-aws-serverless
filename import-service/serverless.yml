@@ -11,8 +11,7 @@ provider:
   environment:
     ENV_STAGE: dev
     S3_BUCKET_NAME: 'my-store-app-import-vks'
-    DYNAMODB_TABLE_PRODUCTS: 'products'
-    DYNAMODB_TABLE_STOCKS: 'stocks'
+    SQS_QUEUE_NAME: CatalogItemsQueue
 
   iam:
     role:
@@ -25,28 +24,18 @@ provider:
           Resource:
             - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}/*
             - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}
-
         - Effect: Allow
           Action:
             - sqs:SendMessage
+            - sqs:GetQueueUrl
             - sqs:ReceiveMessage
           Resource:
-            - arn:aws:sqs:${self:provider.region}:*:CatalogItemsQueue
-
-        - Effect: Allow
-          Action:
-            - dynamodb:Query
-            - dynamodb:GetItem
-            - dynamodb:PutItem
-          Resource:
-            - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_PRODUCTS}
-            - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_STOCKS}
+            - arn:aws:sqs:${self:provider.region}:*:${self:provider.environment.SQS_QUEUE_NAME}
 
 plugins:
   - serverless-webpack
 
 custom:
-  awsRegion: ${self:provider.region}
   webpack:
     webpackConfig: 'webpack.config.js'
     includeModules: true
@@ -54,6 +43,7 @@ custom:
 functions:
   importProductsFile:
     handler: handler.importProductsFile
+    memorySize: 128
     events:
       - http:
           path: /import
@@ -66,6 +56,7 @@ functions:
 
   importFileParser:
     handler: handler.importFileParser
+    memorySize: 128
     events:
       - s3:
           bucket: ${self:provider.environment.S3_BUCKET_NAME}
@@ -73,23 +64,4 @@ functions:
           rules:
             - prefix: uploaded/
           existing: true
-
-  catalogBatchProcess:
-    handler: handler.catalogBatchProcess
-    events:
-      - sqs:
-          arn:
-            Fn::GetAtt:
-              - CatalogItemsQueue
-              - Arn
-          enabled: true
-          batchSize: 5
-
-resources:
-  Resources:
-    CatalogItemsQueue:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: CatalogItemsQueue
-        VisibilityTimeout: 30
 

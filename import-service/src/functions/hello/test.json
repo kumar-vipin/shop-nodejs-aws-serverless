@@ -1,0 +1,73 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:CreateLogGroup",
+        "logs:TagResource"
+      ],
+      "Resource": [
+        "arn:aws:logs:us-east-1:938516305939:log-group:/aws/lambda/import-service-dev*:*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "logs:PutLogEvents"
+      ],
+      "Resource": [
+        "arn:aws:logs:us-east-1:938516305939:log-group:/aws/lambda/import-service-dev*:*:*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem"
+      ],
+      "Resource": [
+        "arn:aws:dynamodb:us-east-1:*:table/products",
+        "arn:aws:dynamodb:us-east-1:*:table/stocks"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::my-store-app-import-vks/*",
+        "arn:aws:s3:::my-store-app-import-vks"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "sqs:SendMessage",
+        "sqs:GetQueueAttributes",
+        "sqs:GetQueueUrl",
+        "sqs:ReceiveMessage"
+      ],
+      "Resource": "arn:aws:sqs:us-east-1:*:CatalogItemsQueue",
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "sqs:ReceiveMessage",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes"
+      ],
+      "Resource": [
+        "arn:aws:sqs:us-east-1:938516305939:CatalogItemsQueue"
+      ],
+      "Effect": "Allow"
+    }
+  ]
+}

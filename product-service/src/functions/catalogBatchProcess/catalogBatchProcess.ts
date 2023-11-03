@@ -87,11 +87,12 @@ const catalogBatchProcess = async (event) => {
       }
     };
     /**
-     * Here I used, forEach function with a callback but forEach does not wait
+     * Note:
+     * Here, Earlier i used forEach function with a callback but forEach does not wait
      * for promises to resolve. So instead of forEach, you can just use a for loop and await each
      * function call for each record.
      */
-    //Records.forEach(recordIterativeFn);
+    /** Records.forEach(recordIterativeFn); */
 
     for (const record of Records) {
       await recordIterativeFn(record);
