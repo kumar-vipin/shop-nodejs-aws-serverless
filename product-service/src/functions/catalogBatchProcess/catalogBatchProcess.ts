@@ -1,5 +1,7 @@
+const AWS = require('aws-sdk');
 import { DynamoDB, Statuses, UUID } from '../../common';
 
+const sns = new AWS.SNS();
 const DYNAMODB_TABLE_PRODUCTS = process.env.DYNAMODB_TABLE_PRODUCTS;
 const DYNAMODB_TABLE_STOCKS = process.env.DYNAMODB_TABLE_STOCKS;
 
@@ -81,7 +83,8 @@ const catalogBatchProcess = async (event) => {
     const recordIterativeFn = async (record) => {
       try {
         const product = JSON.parse(record.body);
-        await createProductWithPut(product);
+        await createProductWithPut(product)
+        return product;
       } catch (error) {
         console.error('Error processing SQS message:', error);
       }
@@ -95,7 +98,19 @@ const catalogBatchProcess = async (event) => {
     /** Records.forEach(recordIterativeFn); */
 
     for (const record of Records) {
-      await recordIterativeFn(record);
+      const product = await recordIterativeFn(record);
+      const topicArn = process.env.SNS_TOPIC_ARN;
+      const params = {
+        TopicArn: topicArn,
+        Message: `This message is from SNS, informing that "${product.title}" have been successfully added.`,
+        MessageAttributes: {
+          price: {
+            DataType: "Number",
+            StringValue: `${product?.price || 0}`
+          }
+        }
+      };
+      await sns.publish(params).promise();
     }
   } catch (error) {
     console.error('Error:', error);

@@ -12,6 +12,8 @@ provider:
     DYNAMODB_TABLE_PRODUCTS: 'products'
     DYNAMODB_TABLE_STOCKS: 'stocks'
     SQS_QUEUE_NAME: CatalogItemsQueue
+    TOPIC_NAME: createProductTopic
+    SNS_TOPIC_ARN: !GetAtt createProductTopic.TopicArn
 
   iam:
     role:
@@ -24,6 +26,14 @@ provider:
           Resource:
             - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_PRODUCTS}
             - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_STOCKS}
+
+        - Effect: Allow
+          Action:
+            - sns:CreateTopic
+            - sns:publish
+            - sns:Subscribe
+          Resource:
+            - arn:aws:sns:${self:provider.region}:*:${self:provider.environment.TOPIC_NAME}
 
 plugins:
   - serverless-webpack
@@ -80,3 +90,25 @@ resources:
       Properties:
         QueueName: ${self:provider.environment.SQS_QUEUE_NAME}
         VisibilityTimeout: 30
+
+    createProductTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: ${self:provider.environment.TOPIC_NAME}
+        DisplayName: ${self:provider.environment.TOPIC_NAME}
+
+    createProductTopicSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: sibar.b3@gmail.com
+        Protocol: email
+        TopicArn: !Ref ${self:provider.environment.TOPIC_NAME}
+
+    createProductTopicSubscriptionWithFilter:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: kumar.vipin1189@gmail.com
+        Protocol: email
+        TopicArn: !Ref ${self:provider.environment.TOPIC_NAME}
+        FilterPolicy:
+          price: [ { "numeric": [ ">", 30 ] } ]
