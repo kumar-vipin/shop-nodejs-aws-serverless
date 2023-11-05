@@ -1,10 +1,9 @@
 {
-  "name": "product-service",
+  "name": "authorization-service",
   "version": "1.0.0",
-  "description": "A service named Product Service has been established, incorporating API Gateway and Lambda functions.",
+  "description": "The authorization-service is a critical component within a serverless backend infrastructure designed to manage and control access to various resources and services. It plays a fundamental role in ensuring the security and proper authentication of users or applications attempting to interact with the system.",
   "main": "handler.ts",
   "scripts": {
-    "package-build": "sls package",
     "deploy:dev": "sls deploy --stage dev",
     "remove:dev-stack": "sls remove --stage dev --region us-east-1"
   },
@@ -13,6 +12,7 @@
     "@types/aws-lambda": "^8.10.73",
     "@types/node": "^14.14.25",
     "@types/serverless": "^1.78.23",
+    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-webpack": "^5.13.0",
     "ts-loader": "^9.5.0",
     "ts-node": "^10.4.0",
