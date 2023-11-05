@@ -1,7 +1,6 @@
 const path = require('path');
 const slsw = require('serverless-webpack');
 const nodeExternals = require('webpack-node-externals');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -22,7 +21,6 @@ module.exports = {
   externals: [nodeExternals()],
   module: {
     rules: [
-      // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       {
         test: /\.(tsx?)$/,
         loader: 'ts-loader',
@@ -39,5 +37,5 @@ module.exports = {
         },
       },
     ],
-  }
+  },
 };

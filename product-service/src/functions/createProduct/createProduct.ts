@@ -1,5 +1,5 @@
-import { DynamoDB, errorResponse, Statuses, successResponse, UUID } from '../utility';
-import { getProductsList } from '../../handler';
+import { DynamoDB, errorResponse, Statuses, successResponse, UUID } from '../../common';
+import { getProductsList } from '../../../handler';
 
 const DYNAMODB_TABLE_PRODUCTS = process.env.DYNAMODB_TABLE_PRODUCTS;
 const DYNAMODB_TABLE_STOCKS = process.env.DYNAMODB_TABLE_STOCKS;

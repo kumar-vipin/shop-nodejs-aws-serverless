@@ -4,21 +4,33 @@ frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs14.x
   stage: dev
   region: us-east-1
+
   environment:
     ENV_STAGE: dev
     S3_BUCKET_NAME: 'my-store-app-import-vks'
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-        - s3:ListBucket
-      Resource:
-        - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}/*
-        - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}
+    SQS_QUEUE_NAME: CatalogItemsQueue
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:GetObject
+            - s3:ListBucket
+          Resource:
+            - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}/*
+            - arn:aws:s3:::${self:provider.environment.S3_BUCKET_NAME}
+        - Effect: Allow
+          Action:
+            - sqs:SendMessage
+            - sqs:GetQueueUrl
+            - sqs:ReceiveMessage
+          Resource:
+            - arn:aws:sqs:${self:provider.region}:*:${self:provider.environment.SQS_QUEUE_NAME}
 
 plugins:
   - serverless-webpack
@@ -31,6 +43,7 @@ custom:
 functions:
   importProductsFile:
     handler: handler.importProductsFile
+    memorySize: 128
     events:
       - http:
           path: /import
@@ -40,8 +53,10 @@ functions:
             parameters:
               querystrings:
                 name: true
+
   importFileParser:
     handler: handler.importFileParser
+    memorySize: 128
     events:
       - s3:
           bucket: ${self:provider.environment.S3_BUCKET_NAME}
@@ -49,3 +64,4 @@ functions:
           rules:
             - prefix: uploaded/
           existing: true
+

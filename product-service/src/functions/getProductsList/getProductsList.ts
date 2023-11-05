@@ -1,9 +1,9 @@
-import { DynamoDB, errorResponse, ResponseInterface, Statuses, successResponse } from '../utility';
+import { DynamoDB, errorResponse, ResponseInterface, Statuses, successResponse } from '../../common';
 
 const DYNAMODB_TABLE_PRODUCTS = process.env.DYNAMODB_TABLE_PRODUCTS;
 const DYNAMODB_TABLE_STOCKS = process.env.DYNAMODB_TABLE_STOCKS;
 
-export const getProductsList: () => Promise<ResponseInterface> = async () => {
+const getProductsList: () => Promise<ResponseInterface> = async () => {
   try {
     const params = {
       TableName: DYNAMODB_TABLE_PRODUCTS,
@@ -41,3 +41,5 @@ export const getProductsList: () => Promise<ResponseInterface> = async () => {
     throw error;
   }
 };
+
+export { getProductsList };

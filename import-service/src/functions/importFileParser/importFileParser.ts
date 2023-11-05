@@ -1,12 +1,15 @@
 import AWS from 'aws-sdk';
 import csv from 'csv-parser';
+import { SendMessageRequest } from 'aws-sdk/clients/sqs';
 
 const s3 = new AWS.S3();
+const sqs = new AWS.SQS();
 
 const importFileParser = async (event) => {
   const records = event?.Records || [];
   try {
-    const resultPromises = records.map(async (record) => {
+    const csvRowsData = [];
+    for (const record of records) {
       const bucketName = record.s3.bucket.name;
       const objectKey = record.s3.object.key;
       const params = { Bucket: bucketName, Key: objectKey };
@@ -23,28 +26,27 @@ const importFileParser = async (event) => {
 
       console.log('Old file deleted', objectKey);
 
-      return new Promise((resolve, reject) => {
-        const results = [];
 
-        s3Stream
-          .pipe(csv())
-          .on('data', (data) => {
-            console.log('CSV Record:', data);
-            results.push(data);
-          })
-          .on('end', () => {
-            console.log('CSV Parsing Completed');
-            resolve(results);
-          })
-          .on('error', (error) => {
-            console.error('Error parsing CSV:', error);
-            reject(error);
-          });
-      });
-    });
-
-    const allResults = await Promise.all(resultPromises);
-    console.log('All Results:', allResults);
+      await s3Stream
+        .pipe(csv())
+        .on('data', (data) => {
+          csvRowsData.push(data);
+        })
+        .on('end', () => {
+          console.log('CSV Parsing Completed');
+        })
+        .on('error', (error) => {
+          console.error('Error parsing CSV:', error);
+        });
+    }
+    const queueUrlData = await sqs.getQueueUrl({QueueName: process.env.SQS_QUEUE_NAME}).promise();
+    for(const rowData of csvRowsData) {
+      const params: SendMessageRequest = {
+        MessageBody: JSON.stringify(rowData),
+        QueueUrl: queueUrlData.QueueUrl,
+      };
+      await sqs.sendMessage(params).promise();
+    }
     return 'CSV processing started.';
   } catch (error) {
     console.error('Error:', error);

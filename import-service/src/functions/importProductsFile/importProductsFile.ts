@@ -1,4 +1,4 @@
-import { errorResponse, successResponse } from '../common';
+import { errorResponse, successResponse } from '../../common';
 import AWS from 'aws-sdk';
 
 const s3 = new AWS.S3();
