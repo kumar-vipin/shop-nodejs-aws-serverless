@@ -5,5 +5,4 @@ jspm_packages
 # Serverless directories
 .serverless
 
-# Ignore Environment variables file
-# .env <- will uncomment in next commit
+.env
