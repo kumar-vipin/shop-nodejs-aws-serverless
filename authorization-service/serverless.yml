@@ -2,14 +2,13 @@ service: authorization-service
 
 frameworkVersion: "3"
 
+useDotenv: true
+
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs14.x
   stage: dev
   region: us-east-1
-
-  environment:
-    ENV_STAGE: dev
 
 plugins:
   - serverless-webpack
