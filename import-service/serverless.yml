@@ -49,15 +49,14 @@ functions:
           path: /import
           method: get
           cors: true
-          authorizer:
-            arn:
-              Fn::Sub: arn:aws:lambda:${self:provider.region}:#{AWS::AccountId}:function:${self:service}-${opt:stage, self:provider.stage}-basicAuthorizer
-            type: token
-            resultTtlInSeconds: 0  # Optional: Cache duration
           request:
             parameters:
               querystrings:
                 name: true
+          authorizer:
+            arn: arn:aws:lambda:${self:provider.region}:#{AWS::AccountId}:function:authorization-service-dev-basicAuthorizer
+            type: request
+            resultTtlInSeconds: 0  # Optional: Cache duration
 
   importFileParser:
     handler: handler.importFileParser

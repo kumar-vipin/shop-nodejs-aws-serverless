@@ -23,6 +23,7 @@ const generatePolicy = (principalId, effect, resource) => (
 
 const basicAuthorizer = (event, _context, callback) => {
   const headers = event?.headers || {};
+
   /** Check if the Authorization header is present in the request.*/
   if (!headers.Authorization) {
     return callback('Unauthorized', { statusCode: 401 });
@@ -38,9 +39,15 @@ const basicAuthorizer = (event, _context, callback) => {
 
   /** Verify if the provided credentials match your environment variables.*/
   const isAuthorized = (username === GITHUB_ACCOUNT_LOGIN && password === TEST_PASSWORD);
+
   const effect = isAuthorized ? Effect.Allow : Effect.Deny;
-  const authorizationText = isAuthorized ? 'Authorized' : 'Unauthorized';
-  return callback(authorizationText, generatePolicy(username, effect, event.methodArn));
+  const policy = generatePolicy(username, effect, event.methodArn);
+
+  if (isAuthorized) {
+    return callback(null, policy);
+  }
+
+  return callback('Forbidden', { statusCode: 403 });
 };
 
 export { basicAuthorizer };
