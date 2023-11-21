@@ -1,0 +1,26 @@
+service: cart-service
+
+frameworkVersion: "3"
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: dev
+  region: us-east-1
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1  # Set to 1 to enable connection reuse, or 0 to disable
+    NODE_OPTIONS: '--enable-source-maps --trace-warnings --stack-trace-limit=1000'
+
+plugins:
+  - serverless-dotenv-plugin
+
+functions:
+  main:
+    handler: dist/main.handler
+    memorySize: 128
+    events:
+      - http:
+          method: ANY
+          path: /{proxy+}
